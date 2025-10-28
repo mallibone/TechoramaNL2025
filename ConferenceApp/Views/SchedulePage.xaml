@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ConferenceApp.ViewModels"
+             xmlns:models="clr-namespace:ConferenceApp.Models"
+             x:Class="ConferenceApp.Views.SchedulePage"
+             x:DataType="vm:ScheduleViewModel"
+             Title="Schedule">
+    
+    <Grid RowDefinitions="Auto,Auto,*">
+        <!-- Day selector -->
+        <CollectionView Grid.Row="0"
+                       x:Name="DaysCollectionView"
+                       ItemsSource="{Binding Days}"
+                       SelectionMode="Single"
+                       SelectionChanged="OnDaySelectionChanged"
+                       HeightRequest="60"
+                       Margin="10,5">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Day">
+                    <Frame Padding="15,10" 
+                           CornerRadius="8"
+                           HasShadow="False"
+                           BorderColor="{StaticResource Primary}">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="{Binding FriendlyName}" 
+                                   FontSize="14"
+                                   FontAttributes="Bold"/>
+                            <Label Text="{Binding Date}" 
+                                   FontSize="12"
+                                   Opacity="0.7"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Search and filters -->
+        <Grid Grid.Row="1" 
+              ColumnDefinitions="*,Auto"
+              Padding="10"
+              ColumnSpacing="10">
+            <SearchBar Grid.Column="0"
+                      Placeholder="Search sessions..."
+                      Text="{Binding SearchText}"/>
+            
+            <Picker Grid.Column="1"
+                   x:Name="TrackPicker"
+                   ItemsSource="{Binding Tracks}"
+                   ItemDisplayBinding="{Binding Name}"
+                   SelectedIndex="0"
+                   SelectedIndexChanged="OnTrackFilterChanged"
+                   Title="Track"
+                   WidthRequest="150"/>
+        </Grid>
+
+        <!-- Sessions list -->
+        <RefreshView Grid.Row="2"
+                    IsRefreshing="{Binding IsRefreshing}"
+                    Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding GroupedSessions}"
+                           SelectionMode="None"
+                           IsGrouped="True">
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate x:DataType="vm:SessionGroup">
+                        <Grid Padding="15,10"
+                              BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}">
+                            <Label Text="{Binding TimeDisplay}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Session">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="{Binding IsFavorite, Converter={StaticResource FavoriteTextConverter}}"
+                                              BackgroundColor="{StaticResource Primary}"
+                                              Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ScheduleViewModel}}, Path=ToggleFavoriteCommand}"
+                                              CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            
+                            <Frame Margin="10,5"
+                                   Padding="15"
+                                   CornerRadius="8"
+                                   HasShadow="False"
+                                   BorderColor="{StaticResource Gray200}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ScheduleViewModel}}, Path=SessionSelectedCommand}"
+                                                         CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                                    <!-- Title -->
+                                    <Label Grid.Row="0" Grid.Column="0"
+                                           Text="{Binding Title}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           LineBreakMode="TailTruncation"
+                                           MaxLines="2"/>
+                                    
+                                    <!-- Favorite icon -->
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                           Text="{Binding IsFavorite, Converter={StaticResource FavoriteIconConverter}}"
+                                           FontSize="20"
+                                           VerticalOptions="Start"
+                                           IsVisible="{Binding IsFavorite}"/>
+                                    
+                                    <!-- Speakers -->
+                                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                           Margin="0,5,0,0"
+                                           FontSize="14"
+                                           Opacity="0.8">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="👤 "/>
+                                                <Span Text="{Binding Speakers, Converter={StaticResource SpeakersToStringConverter}}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    
+                                    <!-- Room and time -->
+                                    <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                                          Spacing="15"
+                                                          Margin="0,5,0,0">
+                                        <Label FontSize="13" Opacity="0.7">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="📍 "/>
+                                                    <Span Text="{Binding Room.Name}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        
+                                        <Label FontSize="13" Opacity="0.7">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="⏱ "/>
+                                                    <Span Text="{Binding StartDisplay}"/>
+                                                    <Span Text=" - "/>
+                                                    <Span Text="{Binding EndDisplay}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </HorizontalStackLayout>
+                                    
+                                    <!-- Track chips -->
+                                    <FlexLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                               Wrap="Wrap"
+                                               Margin="0,8,0,0"
+                                               BindableLayout.ItemsSource="{Binding Tracks}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="models:Track">
+                                                <Border Padding="8,4"
+                                                       Margin="0,0,5,5"
+                                                       StrokeThickness="0"
+                                                       BackgroundColor="{Binding ColorHex}">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="12"/>
+                                                    </Border.StrokeShape>
+                                                    <Label Text="{Binding Name}"
+                                                           FontSize="11"
+                                                           TextColor="White"/>
+                                                </Border>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </FlexLayout>
+                                </Grid>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <!-- Loading indicator -->
+        <ActivityIndicator Grid.Row="2"
+                          IsRunning="{Binding IsLoading}"
+                          IsVisible="{Binding IsLoading}"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"/>
+    </Grid>
+</ContentPage>

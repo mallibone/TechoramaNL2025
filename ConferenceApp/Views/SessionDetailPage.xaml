@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ConferenceApp.ViewModels"
+             xmlns:models="clr-namespace:ConferenceApp.Models"
+             x:Class="ConferenceApp.Views.SessionDetailPage"
+             x:DataType="vm:SessionDetailViewModel"
+             Title="Session Details">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20" IsVisible="{Binding Session, Converter={StaticResource IsNotNullConverter}}">
+            
+            <!-- Title -->
+            <Label Text="{Binding Session.Title}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   LineBreakMode="WordWrap"/>
+            
+            <!-- Favorite button -->
+            <Button Text="{Binding IsFavorite, Converter={StaticResource FavoriteButtonTextConverter}}"
+                   Command="{Binding ToggleFavoriteCommand}"
+                   HorizontalOptions="Start"
+                   BackgroundColor="{Binding IsFavorite, Converter={StaticResource FavoriteColorConverter}}"/>
+            
+            <!-- Feedback button (only visible when feature is enabled) -->
+            <Button Text="💬 Give Feedback"
+                   Command="{Binding OpenFeedbackCommand}"
+                   HorizontalOptions="Start"
+                   IsVisible="{Binding IsFeedbackEnabled}"
+                   BackgroundColor="{StaticResource Secondary}"/>
+            
+            <!-- Time and location -->
+            <Frame Padding="15" 
+                   CornerRadius="8"
+                   HasShadow="False"
+                   BorderColor="{StaticResource Gray200}">
+                <VerticalStackLayout Spacing="10">
+                    <Label FontSize="16" FontAttributes="Bold" Text="When &amp; Where"/>
+                    
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="📅" FontSize="16"/>
+                        <Label Text="{Binding Session.StartUtc, StringFormat='{0:dddd, MMMM d}'}"
+                               FontSize="14"/>
+                    </HorizontalStackLayout>
+                    
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="⏰" FontSize="16"/>
+                        <Label FontSize="14">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Session.StartUtc, StringFormat='{0:HH:mm}'}"/>
+                                    <Span Text=" - "/>
+                                    <Span Text="{Binding Session.EndUtc, StringFormat='{0:HH:mm}'}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </HorizontalStackLayout>
+                    
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="📍" FontSize="16"/>
+                        <Label Text="{Binding Session.Room.Name}"
+                               FontSize="14"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Abstract -->
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Abstract" 
+                       FontSize="18" 
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding Session.Abstract}"
+                       FontSize="14"
+                       LineBreakMode="WordWrap"/>
+            </VerticalStackLayout>
+            
+            <!-- Level and Tags -->
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Level" 
+                       FontSize="18" 
+                       FontAttributes="Bold"/>
+                <Border Padding="10,5"
+                       StrokeThickness="1"
+                       Stroke="{StaticResource Primary}"
+                       HorizontalOptions="Start">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                    <Label Text="{Binding Session.Level}"
+                           FontSize="13"
+                           TextColor="{StaticResource Primary}"/>
+                </Border>
+            </VerticalStackLayout>
+            
+            <!-- Tracks -->
+            <VerticalStackLayout Spacing="10" IsVisible="{Binding Session.Tracks, Converter={StaticResource HasItemsConverter}}">
+                <Label Text="Tracks" 
+                       FontSize="18" 
+                       FontAttributes="Bold"/>
+                <FlexLayout Wrap="Wrap"
+                           BindableLayout.ItemsSource="{Binding Session.Tracks}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:Track">
+                            <Border Padding="10,5"
+                                   Margin="0,0,8,8"
+                                   StrokeThickness="0"
+                                   BackgroundColor="{Binding ColorHex}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="15"/>
+                                </Border.StrokeShape>
+                                <Label Text="{Binding Name}"
+                                       FontSize="13"
+                                       TextColor="White"/>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+            </VerticalStackLayout>
+            
+            <!-- Speakers -->
+            <VerticalStackLayout Spacing="10" IsVisible="{Binding Session.Speakers, Converter={StaticResource HasItemsConverter}}">
+                <Label Text="Speakers" 
+                       FontSize="18" 
+                       FontAttributes="Bold"/>
+                
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Session.Speakers}" Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:Speaker">
+                            <Frame Padding="15"
+                                   CornerRadius="8"
+                                   HasShadow="False"
+                                   BorderColor="{StaticResource Gray200}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SessionDetailViewModel}}, Path=SpeakerSelectedCommand}"
+                                                         CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                                    <Image Grid.Column="0"
+                                          Source="{Binding HeadshotUrl}"
+                                          WidthRequest="60"
+                                          HeightRequest="60"
+                                          Aspect="AspectFill">
+                                        <Image.Clip>
+                                            <EllipseGeometry RadiusX="30" RadiusY="30" Center="30,30"/>
+                                        </Image.Clip>
+                                    </Image>
+                                    
+                                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                        <Label Text="{Binding FullName}"
+                                               FontSize="16"
+                                               FontAttributes="Bold"/>
+                                        <Label Text="{Binding JobTitle}"
+                                               FontSize="13"
+                                               Opacity="0.8"/>
+                                        <Label Text="{Binding Company}"
+                                               FontSize="13"
+                                               Opacity="0.7"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+            
+            <!-- Workshop badge -->
+            <Border Padding="15,10"
+                   StrokeThickness="2"
+                   Stroke="{StaticResource Warning}"
+                   BackgroundColor="{AppThemeBinding Light=#FFF9E6, Dark=#4D4529}"
+                   IsVisible="{Binding Session.IsWorkshop}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8"/>
+                </Border.StrokeShape>
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="🎓" FontSize="20"/>
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="Workshop Session" 
+                               FontSize="16" 
+                               FontAttributes="Bold"/>
+                        <Label Text="Requires registration" 
+                               FontSize="13"
+                               Opacity="0.8"
+                               IsVisible="{Binding Session.RequiresRegistration}"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Border>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

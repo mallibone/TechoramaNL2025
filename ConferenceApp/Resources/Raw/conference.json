@@ -1,0 +1,439 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "1",
+  "generatedAtUtc": "2025-10-22T10:00:00Z",
+  "minAppVersion": "1.0",
+  "conference": {
+    "name": "Schmamorama",
+    "tz": "Europe/Zurich",
+    "venue": "Technopark Zurich",
+    "address": "Technoparkstrasse 1, 8005 Zürich, Switzerland",
+    "startDate": "2025-11-15",
+    "endDate": "2025-11-16"
+  },
+  "api": {
+    "baseUrl": "https://conference-api.example.com",
+    "assetsBaseUrl": "https://cdn.example.com/assets"
+  },
+  "days": [
+    {
+      "index": 0,
+      "date": "2025-11-15",
+      "tz": "Europe/Zurich",
+      "friendlyName": "Day 1 - Friday"
+    },
+    {
+      "index": 1,
+      "date": "2025-11-16",
+      "tz": "Europe/Zurich",
+      "friendlyName": "Day 2 - Saturday"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "track-mobile",
+      "name": "Mobile Development",
+      "colorHex": "#0078D4",
+      "description": "MAUI, Xamarin, and cross-platform mobile apps",
+      "order": 1,
+      "iconUrl": "",
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "track-cloud",
+      "name": "Cloud & Azure",
+      "colorHex": "#00A4EF",
+      "description": "Azure services, serverless, and cloud architecture",
+      "order": 2,
+      "iconUrl": "",
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "track-web",
+      "name": "Web Development",
+      "colorHex": "#68217A",
+      "description": "Blazor, ASP.NET Core, and modern web apps",
+      "order": 3,
+      "iconUrl": "",
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "track-ai",
+      "name": "AI & Machine Learning",
+      "colorHex": "#FF6F00",
+      "description": "ML.NET, Azure AI, and intelligent applications",
+      "order": 4,
+      "iconUrl": "",
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "room-main",
+      "name": "Main Hall",
+      "building": "Building A",
+      "floor": "Ground",
+      "capacity": 300,
+      "mapCoordinates": {
+        "lat": 47.3882,
+        "lon": 8.5176
+      },
+      "indoorMapImageUrl": "",
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "room-track1",
+      "name": "Track Room 1",
+      "building": "Building A",
+      "floor": "1st",
+      "capacity": 100,
+      "mapCoordinates": {
+        "lat": 47.3882,
+        "lon": 8.5176
+      },
+      "indoorMapImageUrl": "",
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "room-track2",
+      "name": "Track Room 2",
+      "building": "Building A",
+      "floor": "1st",
+      "capacity": 100,
+      "mapCoordinates": {
+        "lat": 47.3882,
+        "lon": 8.5176
+      },
+      "indoorMapImageUrl": "",
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "room-workshop",
+      "name": "Workshop Room",
+      "building": "Building B",
+      "floor": "Ground",
+      "capacity": 50,
+      "mapCoordinates": {
+        "lat": 47.3882,
+        "lon": 8.5176
+      },
+      "indoorMapImageUrl": "",
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    }
+  ],
+  "speakers": [
+    {
+      "id": "speaker-1",
+      "fullName": "Sarah Johnson",
+      "bio": "Sarah is a mobile development expert with 10+ years of experience building cross-platform applications. Microsoft MVP and MAUI enthusiast.",
+      "company": "Mobile Innovators Inc.",
+      "jobTitle": "Principal Mobile Architect",
+      "socials": {
+        "twitter": "@sarahjohnson",
+        "github": "sarahjohnson",
+        "linkedin": "sarahjohnson",
+        "website": "https://sarahjohnson.dev"
+      },
+      "headshotUrl": "https://via.placeholder.com/200",
+      "tags": ["Mobile", "MAUI", "Xamarin"],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "speaker-2",
+      "fullName": "Michael Chen",
+      "bio": "Cloud architect specializing in Azure and serverless technologies. Passionate about building scalable distributed systems.",
+      "company": "CloudTech Solutions",
+      "jobTitle": "Senior Cloud Architect",
+      "socials": {
+        "twitter": "@michaelchen",
+        "github": "michaelchen",
+        "linkedin": "michaelchen"
+      },
+      "headshotUrl": "https://via.placeholder.com/200",
+      "tags": ["Azure", "Cloud", "Serverless"],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "speaker-3",
+      "fullName": "Emily Rodriguez",
+      "bio": "Full-stack developer and Blazor expert. Creator of popular open-source UI components library.",
+      "company": "WebDev Masters",
+      "jobTitle": "Lead Developer",
+      "socials": {
+        "twitter": "@emilyrodriguez",
+        "github": "emilyrodriguez",
+        "mastodon": "@emily@mastodon.social"
+      },
+      "headshotUrl": "https://via.placeholder.com/200",
+      "tags": ["Blazor", "Web", "Open Source"],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "speaker-4",
+      "fullName": "David Kumar",
+      "bio": "AI researcher and ML.NET contributor. Focuses on making machine learning accessible to .NET developers.",
+      "company": "AI Research Lab",
+      "jobTitle": "AI Research Engineer",
+      "socials": {
+        "twitter": "@davidkumar",
+        "github": "davidkumar",
+        "linkedin": "davidkumar",
+        "website": "https://davidkumar.ai"
+      },
+      "headshotUrl": "https://via.placeholder.com/200",
+      "tags": ["AI", "ML.NET", "Research"],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "session-1",
+      "title": "Building Modern Mobile Apps with .NET MAUI",
+      "abstract": "Learn how to build beautiful, cross-platform mobile applications using .NET MAUI. We'll cover best practices, performance optimization, and real-world patterns for production apps.",
+      "level": "Intermediate",
+      "tags": ["MAUI", "Mobile", "Cross-Platform"],
+      "startUtc": "2025-11-15T08:00:00Z",
+      "endUtc": "2025-11-15T09:00:00Z",
+      "dayIndex": 0,
+      "trackIds": ["track-mobile"],
+      "speakerIds": ["speaker-1"],
+      "roomId": "room-main",
+      "capacity": 300,
+      "isLiveStream": true,
+      "recordingUrl": null,
+      "liveUrl": null,
+      "isWorkshop": false,
+      "requiresRegistration": false,
+      "imageUrls": [],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "session-2",
+      "title": "Azure Serverless Architecture Patterns",
+      "abstract": "Explore proven patterns for building serverless applications on Azure. We'll dive into Azure Functions, Logic Apps, and Event Grid to create scalable, cost-effective solutions.",
+      "level": "Advanced",
+      "tags": ["Azure", "Serverless", "Architecture"],
+      "startUtc": "2025-11-15T08:00:00Z",
+      "endUtc": "2025-11-15T09:00:00Z",
+      "dayIndex": 0,
+      "trackIds": ["track-cloud"],
+      "speakerIds": ["speaker-2"],
+      "roomId": "room-track1",
+      "capacity": 100,
+      "isLiveStream": false,
+      "recordingUrl": null,
+      "liveUrl": null,
+      "isWorkshop": false,
+      "requiresRegistration": false,
+      "imageUrls": [],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "session-3",
+      "title": "Blazor: Interactive Web UIs with C#",
+      "abstract": "Discover how to build rich, interactive web applications using Blazor. From WebAssembly to Server-side rendering, we'll cover all rendering modes and when to use each.",
+      "level": "Beginner",
+      "tags": ["Blazor", "Web", "C#"],
+      "startUtc": "2025-11-15T09:30:00Z",
+      "endUtc": "2025-11-15T10:30:00Z",
+      "dayIndex": 0,
+      "trackIds": ["track-web"],
+      "speakerIds": ["speaker-3"],
+      "roomId": "room-track2",
+      "capacity": 100,
+      "isLiveStream": false,
+      "recordingUrl": null,
+      "liveUrl": null,
+      "isWorkshop": false,
+      "requiresRegistration": false,
+      "imageUrls": [],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "session-4",
+      "title": "Getting Started with ML.NET",
+      "abstract": "Introduction to machine learning for .NET developers. Learn how to train, evaluate, and deploy ML models using ML.NET with practical examples.",
+      "level": "Beginner",
+      "tags": ["ML.NET", "AI", "Machine Learning"],
+      "startUtc": "2025-11-15T09:30:00Z",
+      "endUtc": "2025-11-15T10:30:00Z",
+      "dayIndex": 0,
+      "trackIds": ["track-ai"],
+      "speakerIds": ["speaker-4"],
+      "roomId": "room-main",
+      "capacity": 300,
+      "isLiveStream": true,
+      "recordingUrl": null,
+      "liveUrl": null,
+      "isWorkshop": false,
+      "requiresRegistration": false,
+      "imageUrls": [],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "session-5",
+      "title": "MAUI Performance Deep Dive",
+      "abstract": "Advanced techniques for optimizing .NET MAUI applications. We'll cover rendering performance, memory management, and platform-specific optimizations.",
+      "level": "Advanced",
+      "tags": ["MAUI", "Performance", "Mobile"],
+      "startUtc": "2025-11-15T11:00:00Z",
+      "endUtc": "2025-11-15T12:00:00Z",
+      "dayIndex": 0,
+      "trackIds": ["track-mobile"],
+      "speakerIds": ["speaker-1"],
+      "roomId": "room-track1",
+      "capacity": 100,
+      "isLiveStream": false,
+      "recordingUrl": null,
+      "liveUrl": null,
+      "isWorkshop": false,
+      "requiresRegistration": false,
+      "imageUrls": [],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "session-6",
+      "title": "Building Resilient Cloud Applications",
+      "abstract": "Learn patterns and practices for building resilient, fault-tolerant applications in the cloud. Topics include retry policies, circuit breakers, and chaos engineering.",
+      "level": "Intermediate",
+      "tags": ["Cloud", "Resilience", "Azure"],
+      "startUtc": "2025-11-15T11:00:00Z",
+      "endUtc": "2025-11-15T12:00:00Z",
+      "dayIndex": 0,
+      "trackIds": ["track-cloud"],
+      "speakerIds": ["speaker-2"],
+      "roomId": "room-track2",
+      "capacity": 100,
+      "isLiveStream": false,
+      "recordingUrl": null,
+      "liveUrl": null,
+      "isWorkshop": false,
+      "requiresRegistration": false,
+      "imageUrls": [],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "session-7",
+      "title": "Hands-on: Building a Blazor Component Library",
+      "abstract": "Workshop: Create reusable Blazor components from scratch. Participants will build a complete component library with documentation and examples.",
+      "level": "Intermediate",
+      "tags": ["Blazor", "Workshop", "Components"],
+      "startUtc": "2025-11-15T13:00:00Z",
+      "endUtc": "2025-11-15T16:00:00Z",
+      "dayIndex": 0,
+      "trackIds": ["track-web"],
+      "speakerIds": ["speaker-3"],
+      "roomId": "room-workshop",
+      "capacity": 50,
+      "isLiveStream": false,
+      "recordingUrl": null,
+      "liveUrl": null,
+      "isWorkshop": true,
+      "requiresRegistration": true,
+      "imageUrls": [],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "session-8",
+      "title": "AI-Powered Applications with Azure OpenAI",
+      "abstract": "Integrate Azure OpenAI Service into your .NET applications. Build intelligent features using GPT models, embeddings, and semantic search.",
+      "level": "Intermediate",
+      "tags": ["Azure", "OpenAI", "AI"],
+      "startUtc": "2025-11-16T08:00:00Z",
+      "endUtc": "2025-11-16T09:00:00Z",
+      "dayIndex": 1,
+      "trackIds": ["track-ai"],
+      "speakerIds": ["speaker-4"],
+      "roomId": "room-main",
+      "capacity": 300,
+      "isLiveStream": true,
+      "recordingUrl": null,
+      "liveUrl": null,
+      "isWorkshop": false,
+      "requiresRegistration": false,
+      "imageUrls": [],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "session-9",
+      "title": "Cross-Platform Data Sync Strategies",
+      "abstract": "Implement robust offline-first data synchronization in mobile apps. Cover conflict resolution, delta sync, and background refresh patterns.",
+      "level": "Advanced",
+      "tags": ["Mobile", "Sync", "Offline"],
+      "startUtc": "2025-11-16T09:30:00Z",
+      "endUtc": "2025-11-16T10:30:00Z",
+      "dayIndex": 1,
+      "trackIds": ["track-mobile"],
+      "speakerIds": ["speaker-1"],
+      "roomId": "room-track1",
+      "capacity": 100,
+      "isLiveStream": false,
+      "recordingUrl": null,
+      "liveUrl": null,
+      "isWorkshop": false,
+      "requiresRegistration": false,
+      "imageUrls": [],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "session-10",
+      "title": "Modern Web APIs with Minimal APIs",
+      "abstract": "Build lightweight, high-performance APIs using ASP.NET Core Minimal APIs. Best practices for routing, validation, and OpenAPI documentation.",
+      "level": "Beginner",
+      "tags": ["ASP.NET", "API", "Web"],
+      "startUtc": "2025-11-16T09:30:00Z",
+      "endUtc": "2025-11-16T10:30:00Z",
+      "dayIndex": 1,
+      "trackIds": ["track-web"],
+      "speakerIds": ["speaker-3"],
+      "roomId": "room-track2",
+      "capacity": 100,
+      "isLiveStream": false,
+      "recordingUrl": null,
+      "liveUrl": null,
+      "isWorkshop": false,
+      "requiresRegistration": false,
+      "imageUrls": [],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "session-11",
+      "title": "Panel: The Future of .NET",
+      "abstract": "Join our expert panel as they discuss the future of .NET, upcoming features, and the evolution of cross-platform development. Q&A included.",
+      "level": "All Levels",
+      "tags": [".NET", "Panel", "Future"],
+      "startUtc": "2025-11-16T15:00:00Z",
+      "endUtc": "2025-11-16T16:00:00Z",
+      "dayIndex": 1,
+      "trackIds": ["track-mobile", "track-cloud", "track-web", "track-ai"],
+      "speakerIds": ["speaker-1", "speaker-2", "speaker-3", "speaker-4"],
+      "roomId": "room-main",
+      "capacity": 300,
+      "isLiveStream": true,
+      "recordingUrl": null,
+      "liveUrl": null,
+      "isWorkshop": false,
+      "requiresRegistration": false,
+      "imageUrls": [],
+      "lastUpdated": "2025-10-22T10:00:00Z"
+    }
+  ],
+  "sponsors": [
+    {
+      "id": "sponsor-1",
+      "name": "Techorama",
+      "tier": "Platinum",
+      "logoUrl": "https://via.placeholder.com/300x100",
+      "website": "https://techorama.nl",
+      "blurb": "The #1 Conference for IT & Microsoft professionals in the Netherlands"
+    },
+    {
+      "id": "sponsor-2",
+      "name": "iDIP Solution",
+      "tier": "Gold",
+      "logoUrl": "https://via.placeholder.com/300x100",
+      "website": "https://idip-solution.com",
+      "blurb": "Simplifying industrial digitization"
+    }
+  ]
+}

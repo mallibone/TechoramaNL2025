@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ConferenceApp.ViewModels"
+             x:Class="ConferenceApp.Views.FlagsDebugPage"
+             x:DataType="vm:FlagsDebugViewModel"
+             Title="Feature Flags (DEBUG)">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <Label Text="🚩 Feature Flags Debug"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+            
+            <Label Text="Toggle feature flags below. Changes are saved locally and will persist until updated remotely."
+                   TextColor="{StaticResource Gray600}"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"/>
+            
+            <!-- Current Version Info -->
+            <Frame BorderColor="{StaticResource Primary}" Padding="15">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Current Configuration" FontAttributes="Bold" FontSize="16"/>
+                    <Label Text="{Binding CurrentVersion, StringFormat='Version: {0}'}"/>
+                    <Label Text="{Binding CurrentETag, StringFormat='ETag: {0}'}"/>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Session Feedback Flag -->
+            <Frame BorderColor="{StaticResource Gray300}" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Session Feedback" FontAttributes="Bold" FontSize="16"/>
+                    <Label Text="Enables users to provide feedback on conference sessions"
+                           TextColor="{StaticResource Gray600}"
+                           FontSize="12"/>
+                    
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                        <Label Grid.Column="0" 
+                               Text="{Binding SessionFeedbackEnabled, StringFormat='Status: {0}'}"
+                               VerticalOptions="Center"/>
+                        <Switch Grid.Column="1" 
+                                IsToggled="{Binding SessionFeedbackEnabled, Mode=OneWay}"
+                                Toggled="OnSessionFeedbackToggled"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Actions -->
+            <VerticalStackLayout Spacing="10">
+                <Button Text="Refresh from Remote"
+                        Command="{Binding RefreshFromRemoteCommand}"/>
+            </VerticalStackLayout>
+            
+            <!-- Warning -->
+            <Frame BackgroundColor="#FFF3CD" BorderColor="#FFC107" Padding="10">
+                <Label Text="⚠️ DEBUG ONLY: This page is only available in debug builds. Changes are saved to local cache."
+                       TextColor="#856404"
+                       FontSize="12"/>
+            </Frame>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>

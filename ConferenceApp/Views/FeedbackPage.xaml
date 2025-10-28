@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ConferenceApp.ViewModels"
+             x:Class="ConferenceApp.Views.FeedbackPage"
+             x:DataType="vm:FeedbackViewModel"
+             Title="Session Feedback">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <!-- Session Title -->
+            <Label Text="{Binding SessionTitle}"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+            
+            <!-- Rating Section -->
+            <VerticalStackLayout Spacing="10">
+                <Label Text="How would you rate this session?"
+                       FontSize="16"
+                       FontAttributes="Bold"/>
+                
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Label Text="Rating:" VerticalOptions="Center"/>
+                    <Stepper Value="{Binding Rating}"
+                             Minimum="1"
+                             Maximum="5"
+                             Increment="1"/>
+                    <Label Text="{Binding Rating}" 
+                           VerticalOptions="Center"
+                           FontSize="18"
+                           FontAttributes="Bold"/>
+                    <Label Text="/ 5" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                
+                <!-- Star visualization -->
+                <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="⭐" FontSize="24" IsVisible="{Binding Rating, Converter={StaticResource IntGreaterThanConverter}, ConverterParameter=0}"/>
+                    <Label Text="⭐" FontSize="24" IsVisible="{Binding Rating, Converter={StaticResource IntGreaterThanConverter}, ConverterParameter=1}"/>
+                    <Label Text="⭐" FontSize="24" IsVisible="{Binding Rating, Converter={StaticResource IntGreaterThanConverter}, ConverterParameter=2}"/>
+                    <Label Text="⭐" FontSize="24" IsVisible="{Binding Rating, Converter={StaticResource IntGreaterThanConverter}, ConverterParameter=3}"/>
+                    <Label Text="⭐" FontSize="24" IsVisible="{Binding Rating, Converter={StaticResource IntGreaterThanConverter}, ConverterParameter=4}"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+            
+            <!-- Comments Section -->
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Comments (optional)"
+                       FontSize="16"
+                       FontAttributes="Bold"/>
+                
+                <Editor Text="{Binding Comments}"
+                        Placeholder="Share your thoughts about this session..."
+                        HeightRequest="150"
+                        AutoSize="TextChanges"/>
+            </VerticalStackLayout>
+            
+            <!-- Submission Status -->
+            <Label Text="✓ Feedback submitted successfully!"
+                   TextColor="Green"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   IsVisible="{Binding IsSubmitted}"/>
+            
+            <!-- Action Buttons -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,20,0,0">
+                <Button Text="Cancel"
+                        Grid.Column="0"
+                        Command="{Binding CancelCommand}"
+                        BackgroundColor="{StaticResource Gray200}"/>
+                
+                <Button Text="Submit Feedback"
+                        Grid.Column="1"
+                        Command="{Binding SubmitFeedbackCommand}"
+                        IsEnabled="{Binding IsSubmitted, Converter={StaticResource InvertedBoolConverter}}"/>
+            </Grid>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>

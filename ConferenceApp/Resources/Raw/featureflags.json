@@ -1,0 +1,7 @@
+{
+  "version": "1",
+  "sessionFeedbackEnabled": true,
+  "lunchMenuEnabled": false,
+  "speakerHeartRateMonitorEnabled": false,
+  "floorPlanEnabled": false
+}

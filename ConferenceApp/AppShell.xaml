@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ConferenceApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ConferenceApp"
+    xmlns:views="clr-namespace:ConferenceApp.Views"
+    Title="Conference App">
+
+    <TabBar>
+        <ShellContent
+            Title="Schedule"
+            Icon="calendar.png"
+            ContentTemplate="{DataTemplate views:SchedulePage}"
+            Route="schedule"
+            IsVisible="True" />
+        
+        <ShellContent
+            Title="Favorites"
+            Icon="star.png"
+            ContentTemplate="{DataTemplate views:FavoritesPage}"
+            Route="favorites"
+            IsVisible="True" />
+
+    </TabBar>
+
+</Shell>

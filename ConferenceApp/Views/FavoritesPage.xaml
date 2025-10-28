@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ConferenceApp.ViewModels"
+             xmlns:models="clr-namespace:ConferenceApp.Models"
+             x:Class="ConferenceApp.Views.FavoritesPage"
+             x:DataType="vm:FavoritesViewModel"
+             Title="My Favorites">
+    
+    <Grid RowDefinitions="*">
+        <CollectionView ItemsSource="{Binding FavoriteSessions}"
+                       SelectionMode="None"
+                       EmptyView="No favorite sessions yet. Add some from the schedule!">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Session">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Remove"
+                                          BackgroundColor="{StaticResource Danger}"
+                                          Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FavoritesViewModel}}, Path=RemoveFavoriteCommand}"
+                                          CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        
+                        <Frame Margin="10,5"
+                               Padding="15"
+                               CornerRadius="8"
+                               HasShadow="False"
+                               BorderColor="{StaticResource Gray200}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FavoritesViewModel}}, Path=SessionSelectedCommand}"
+                                                     CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                                <Label Grid.Row="0" Grid.Column="0"
+                                       Text="{Binding Title}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="2"/>
+                                
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Text="⭐"
+                                       FontSize="20"
+                                       VerticalOptions="Start"/>
+                                
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Margin="0,5,0,0"
+                                       FontSize="14"
+                                       Opacity="0.8">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="👤 "/>
+                                            <Span Text="{Binding Speakers, Converter={StaticResource SpeakersToStringConverter}}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                
+                                <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                                      Spacing="15"
+                                                      Margin="0,5,0,0">
+                                    <Label FontSize="13" Opacity="0.7">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="📅 "/>
+                                                <Span Text="{Binding StartUtc, StringFormat='{0:MMM d}'}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    
+                                    <Label FontSize="13" Opacity="0.7">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="⏱ "/>
+                                                <Span Text="{Binding StartUtc, StringFormat='{0:HH:mm}'}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    
+                                    <Label FontSize="13" Opacity="0.7">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="📍 "/>
+                                                <Span Text="{Binding Room.Name}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </HorizontalStackLayout>
+                                
+                                <FlexLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                           Wrap="Wrap"
+                                           Margin="0,8,0,0"
+                                           BindableLayout.ItemsSource="{Binding Tracks}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Track">
+                                            <Border Padding="8,4"
+                                                   Margin="0,0,5,5"
+                                                   StrokeThickness="0"
+                                                   BackgroundColor="{Binding ColorHex}">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="12"/>
+                                                </Border.StrokeShape>
+                                                <Label Text="{Binding Name}"
+                                                       FontSize="11"
+                                                       TextColor="White"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </Grid>
+                        </Frame>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                          IsVisible="{Binding IsLoading}"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"/>
+    </Grid>
+</ContentPage>
